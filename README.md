@@ -5,7 +5,7 @@ ROS project template for OpenCV related applications.
 
 Start fake images publisher node:
 ```shell
-rosrun template publisher image:=image_raw
+rosrun template publisher.py image:=image_raw
 ```
 
 Subscribers:
