@@ -25,10 +25,11 @@ ROS_IMAGE_TOPIC: Final[str] = "image"
 def image_callback(msg: Image, cv_bridge: CvBridge) -> None:
   # конвертация ROS-сообщения в OpenCV изображение
   # Q: Каков формат у изображения?
+  # A: mono8, 320x240
   image = cv_bridge.imgmsg_to_cv2(msg)
-  
-  # Задание 2: Реализуйте отображение полученного изображения.
-  # Используйте функции cv2.imshow и cv2.waitKey
+  cv2.imshow("Received Image", image)
+
+  cv2.waitKey(1)
 
 
 def main() -> None:
@@ -48,6 +49,10 @@ def main() -> None:
   rospy.Subscriber(ROS_IMAGE_TOPIC, Image, lambda msg: image_callback(msg, cv_bridge), queue_size=None)
 
   # Q: Что происходит в данной строчке кода?
+  # A: Заставляет ROS-узел работать в бесконечном цикле,
+  #    ожидая событий и обрабатывая сообщения. Программа 
+  #    не завершится до тех пор, пока не будет остановлена
+  #    извне (Ctrl+C)
   rospy.spin()
 
 

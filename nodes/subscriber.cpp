@@ -8,8 +8,9 @@
 #include <opencv2/highgui/highgui.hpp> // imshow
 
 void imageCallback(const sensor_msgs::ImageConstPtr& msg) {
-  auto image = cv_bridge::toCvCopy(msg);
-  // ... imshow
+  auto image = cv_bridge::toCvCopy(msg, "bgr8")->image;
+  cv::imshow("ROS Image Viewer", image);
+  cv::waitKey(1);
 }
 
 int main(int argc, char** argv) {
